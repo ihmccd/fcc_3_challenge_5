@@ -6,7 +6,8 @@ var fs = require("fs");
 var express = require("express");
 var app = express();
 var multer  = require('multer');
-var upload = multer({dest:'./uploads'});
+var upload = multer({dest:'uploads/'});
+var path = require("path");
 var bodyParser = require('body-parser'); 
 app.use(bodyParser.json()); 
 
@@ -34,7 +35,7 @@ app.post('/api/Upload',upload.single('imgUploader'),function(req,res){
             console.log(req.file.filename+' deleted');
         }
     });
-    res.json({'file name': req.files[0].originalname, size: req.files[0].size + ' bytes'})
+    res.json({'file name': req.file.originalname, size: req.file.size + ' bytes'})
 });
 
 
